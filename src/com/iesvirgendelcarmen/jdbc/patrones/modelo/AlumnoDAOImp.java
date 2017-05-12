@@ -2,6 +2,7 @@ package com.iesvirgendelcarmen.jdbc.patrones.modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -60,8 +61,27 @@ public class AlumnoDAOImp implements IAlumnoDAO {
 
 	@Override
 	public boolean comprobarAlumno(String apellidos) {
-		// TODO Auto-generated method stub
-		return false;
+		// select * from alumno where apellidos =
+		//System.out.println(apellidos);
+		boolean exito = true;
+		try {
+			CONEXION.setAutoCommit(true);
+			String sentenciaSQL = "SELECT id FROM alumno WHERE apellidos = ?";
+			PreparedStatement pStatement = CONEXION.prepareStatement(sentenciaSQL);
+			pStatement.setString(1, apellidos);
+		//	pStatement.execute();
+			ResultSet rSet = pStatement.executeQuery();
+			
+			if(!rSet.isBeforeFirst()){  //no exito en la consulta        
+				exito = false;	
+			}
+			
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return exito;
 	}
 
 	@Override

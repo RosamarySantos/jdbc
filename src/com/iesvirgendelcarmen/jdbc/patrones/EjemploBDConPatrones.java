@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import com.iesvirgendelcarmen.jdbc.patrones.modelo.Alumno;
 import com.iesvirgendelcarmen.jdbc.patrones.modelo.AlumnoDAOImp;
 import com.iesvirgendelcarmen.jdbc.patrones.modelo.IAlumnoDAO;
@@ -39,7 +41,7 @@ public class EjemploBDConPatrones {
 		//borrar una alumno por apellidos
 	//	borrarAlumnoBD();
 		// 3º Comprobar la existencia de un alumno
-		//existeAlumnoBD()
+		existeAlumnoBD();
 	}
 	
 	public static List<Alumno> obtenerListaAlumnos(String nombreFichero){
@@ -73,6 +75,17 @@ public class EjemploBDConPatrones {
 		ALUMNO_DAO.borrarAlumno(apellidos);
 	}
 	
-	
+	public static void existeAlumnoBD(){
+		String inputApellidos = JOptionPane.showInputDialog(
+				"Introduce los apellidos del alumno");
+		//System.out.println(inputValue);
+		boolean exito = ALUMNO_DAO.comprobarAlumno(inputApellidos);
+		if (!exito)
+			JOptionPane.showMessageDialog(null,"No existe el alumno "
+		+ inputApellidos, "INFORMACIÓN",  JOptionPane.ERROR_MESSAGE);
+		else
+			JOptionPane.showMessageDialog(null,  "Existe el alumno "
+					+ inputApellidos,"INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+	}
 
 }
