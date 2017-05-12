@@ -37,7 +37,24 @@ public class AlumnoDAOImp implements IAlumnoDAO {
 
 	@Override
 	public void borrarAlumno(String apellidos) {
-		// TODO Auto-generated method stub
+		// delete from alumno where apellidos = 'montoro montoro';
+		String sentenciaSQL = "DELETE FROM alumno WHERE apellidos = ?";
+		try {
+			CONEXION.setAutoCommit(true);
+			PreparedStatement preparedStatemen = CONEXION.prepareStatement(sentenciaSQL);
+			preparedStatemen.setString(1, apellidos);
+			int valor = preparedStatemen.executeUpdate();
+			if (valor == 0)
+				System.out.println("No se ha podido realizar la acción de borrado");
+			else
+				System.out.println("El borrado del alumno es correcto");
+
+			//System.out.println(valor);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 
 	}
 

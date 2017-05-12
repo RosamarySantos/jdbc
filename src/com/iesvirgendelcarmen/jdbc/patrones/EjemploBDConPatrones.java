@@ -35,7 +35,11 @@ public class EjemploBDConPatrones {
 		List<Alumno> listaAlumnos = obtenerListaAlumnos("ficheros/alumnos.txt");
 		//System.out.println(listaAlumnos);
 		//2º insertar los datos de los alumnos
-		insertarDatosBD(listaAlumnos);
+	//	insertarDatosBD(listaAlumnos);
+		//borrar una alumno por apellidos
+	//	borrarAlumnoBD();
+		// 3º Comprobar la existencia de un alumno
+		//existeAlumnoBD()
 	}
 	
 	public static List<Alumno> obtenerListaAlumnos(String nombreFichero){
@@ -59,6 +63,14 @@ public class EjemploBDConPatrones {
 	
 	public static void insertarDatosBD(List<Alumno> listaAlumnos){
 		ALUMNO_DAO.insertarAlumnos(listaAlumnos);
+	}
+	
+	public static void borrarAlumnoBD(){
+		Scanner in = new Scanner(System.in);
+		System.out.println("Introduce los apellidos:");
+		String apellidos = in.nextLine();
+		in.close();
+		ALUMNO_DAO.borrarAlumno(apellidos);
 	}
 	
 	
